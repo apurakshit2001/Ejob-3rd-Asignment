@@ -1,0 +1,14 @@
+.white{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    transition:0.2s ease-in-out;
+}
+.white:hover{
+    color: #e2f022;
+    font-size: 30px;
+    transition:0.2s ease-in-out;
+}
+.white:focus{
+    color: rgb(245, 108, 44);
+}

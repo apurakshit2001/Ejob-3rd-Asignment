@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Input</title>
+    <script>
+        const array1 = [];
+        const array2 = [];
+        const unionArray = [];
+        
+        function createArray() {
+            const size = document.getElementById("size").value;
+            if (size <= 0) {
+                alert("Please enter a valid size.");
+                return;
+            }
+            
+            const elementsDiv = document.getElementById("elements");
+            elementsDiv.innerHTML = '';
+            
+            for (let i = 0; i < size; i++) {
+                elementsDiv.innerHTML += `Enter element : <input type="number" id="element${i}"><br>`;
+            }
+            
+            document.getElementById("arrayElements").style.display = "block";
+            document.getElementById(`element0`).focus();
+        }
+        
+        function showArray() {
+            const size = document.getElementById("size").value;
+            
+            array1.length = 0; // Clear array1
+            for (let i = 0; i < size; i++) {
+                const element = document.getElementById(`element${i}`).value;
+                array1.push(Number(element));
+            }
+            
+            document.getElementById("output").innerText = `[${array1.join(", ")}]`;
+        }
+        
+        function createArray2() {
+            const size = document.getElementById("size2").value;
+            if (size <= 0) {
+                alert("Please enter a valid size.");
+                return;
+            }
+            
+            const elementsDiv = document.getElementById("elements2");
+            elementsDiv.innerHTML = '';
+            
+            for (let i = 0; i < size; i++) {
+                elementsDiv.innerHTML += `Enter element ${i + 1}: <input type="number" id="element2_${i}"><br>`;
+            }
+            
+            document.getElementById("arrayElements2").style.display = "block";
+            document.getElementById(`element2_0`).focus();
+        }
+        
+        function showArray2() {
+            const size = document.getElementById("size2").value;
+            
+            array2.length = 0; // Clear array2
+            for (let i = 0; i < size; i++) {
+                const element = document.getElementById(`element2_${i}`).value;
+                array2.push(Number(element));
+            }
+            
+            document.getElementById("output2").innerText = `[${array2.join(", ")}]`;
+        }
+        
+        function calculateUnion() {
+            unionArray.length = 0; // Clear unionArray
+            
+            function isInArray(array, value) {
+                return array.indexOf(value) !== -1;
+            }
+            
+            for (let i = 0; i < array1.length; i++) {
+                if (!isInArray(array2, array1[i])) {
+                    unionArray.push(array1[i]);
+                }
+            }
+            
+            for (let i = 0; i < array2.length; i++) {
+                if (!isInArray(unionArray, array2[i])) {
+                    unionArray.push(array2[i]);
+                }
+            }
+            
+            document.getElementById("unionOutput").innerText = `[${unionArray.join(", ")}]`;
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    const activeElement = document.activeElement;
+                    
+                    if (activeElement.id === 'size') {
+                        createArray();
+                        event.preventDefault();
+                    } else if (activeElement.id.startsWith('element')) {
+                        const currentId = activeElement.id;
+                        const currentNum = parseInt(currentId.match(/\d+/)[0]);
+                        const nextNum = currentNum + 1;
+                        const nextElement = document.getElementById(`element${nextNum}`);
+                        
+                        if (nextElement) {
+                            nextElement.focus();
+                        } else {
+                            showArray();
+                            document.getElementById('size2').focus();
+                        }
+                        event.preventDefault();
+                    } else if (activeElement.id === 'size2') {
+                        createArray2();
+                        event.preventDefault();
+                    } else if (activeElement.id.startsWith('element2_')) {
+                        const currentId = activeElement.id;
+                        const currentNum = parseInt(currentId.match(/\d+/)[0]);
+                        const nextNum = currentNum + 1;
+                        const nextElement = document.getElementById(`element2_${nextNum}`);
+                        
+                        if (nextElement) {
+                            nextElement.focus();
+                        } else {
+                            showArray2();
+                            document.getElementById('calculateUnionButton').focus();
+                        }
+                        event.preventDefault();
+                    } else if (activeElement.id === 'calculateUnionButton') {
+                        calculateUnion();
+                        event.preventDefault();
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="upperBOx">
+        <div class="leftBOx">
+            <h2>Enter the size of the array-1:</h2>
+            <input type="number" id="size" min="1">
+            <button onclick="createArray()">Submit</button>
+            
+            <div id="arrayElements" style="display:none;">
+                <h2>Enter the array elements:</h2>
+                <div id="elements"></div>
+                <button onclick="showArray()">Show Array</button>
+            </div>
+            
+            <h2>The array elements are:</h2>
+            <p id="output"></p>
+        </div>
+        <div class="RIghtbox">
+            <h2>Enter the size of the array-2:</h2>
+            <input type="number" id="size2" min="1">
+            <button onclick="createArray2()">Submit</button>
+            
+            <div id="arrayElements2" style="display:none;">
+                <h2>Enter the array elements:</h2>
+                <div id="elements2"></div>
+                <button onclick="showArray2()">Show Array</button>
+            </div>
+            
+            <h2>The array elements are:</h2>
+            <p id="output2"></p>
+        </div>
+    </div>
+    <div class="downUnioBox">
+        <h2 class="white">Union of two arrays:</h2>
+        <p id="unionOutput"></p>
+        <button id="calculateUnionButton" onclick="calculateUnion()">Calculate Union</button>
+    </div>
+</body>
+</html>

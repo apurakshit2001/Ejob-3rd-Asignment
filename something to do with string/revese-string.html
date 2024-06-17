@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="string">
+    <input type="button" value="reverse" onclick="reverseStr()">
+    <p id="reversedString"></p>
+
+    <script>
+        function reverseStr() {
+            let str = document.getElementById("string").value;
+            let array = str.split(" ");
+            let reversedString = '';
+            for (let i = array.length - 1; i >= 0; i--) {
+                if (array[i] === '') {
+                    continue;
+                } else if (reversedString.length > 0) {
+                    reversedString += ' ';
+                    reversedString += array[i];
+                } else {
+                    reversedString += array[i];
+                }
+            }
+            document.getElementById("reversedString").innerHTML = reversedString;
+        }
+    </script>
+
+</body>
+
+</html>

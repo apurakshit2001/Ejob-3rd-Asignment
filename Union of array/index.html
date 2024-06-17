@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Input and Output</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../a.css">
+</head>
+
+<body>
+    <div class="upperBOx">
+        <div class="leftBOx">
+            <h2>Enter the size of the array-1:</h2>
+            <input type="number" id="size" min="1">
+            <button onclick="createArray()">Submit</button>
+
+            <div id="arrayElements" style="display:none;">
+                <h2>Enter the array elements:</h2>
+                <div id="elements"></div>
+                <button onclick="showArray()">Show Array</button>
+            </div>
+
+            <h2>The array elements are:</h2>
+            <p id="output"></p>
+        </div>
+        <div class="RIghtbox">
+            <h2>Enter the size of the array-2:</h2>
+            <input type="number" id="size2" min="1">
+            <button onclick="createArray2()">Submit</button>
+
+            <div id="arrayElements2" style="display:none;">
+                <h2>Enter the array elements:</h2>
+                <div id="elements2"></div>
+                <button onclick="showArray2()">Show Array</button>
+            </div>
+
+            <h2>The array elements are:</h2>
+            <p id="output2"></p>
+        </div>
+    </div>
+    <div class="downUnioBox">
+        <h2 class="white">Union of two arrays:</h2>
+        <p id="unionOutput"></p>
+        <button onclick="calculateUnion()">Calculate Union</button>
+    </div>
+
+    <a href="../index.html"  class="white">Previous</a>  <a href="../selector/index.html" class="white">Next</a>
+
+</body>
+
+</html>

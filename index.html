@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./something to do with string/style.css">
+    <link rel="stylesheet" href="a.css">
+    <title>Word Replacement</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="heading">Word Replacement Program</h1>
+        <p>JavaScript program that takes two arrays of numbers as input and returns a new
+            array containing the union of the two arrays (all elements, with duplicates
+            removed).</p>
+        <label for="inputString">Enter a string:</label>
+        <input type="text" id="inputString" placeholder="Type your string here">
+        <br><br>
+        <button onclick="replaceWords()">Replace Words</button>
+        <br><br>
+        <h1>Output:
+            <span id="output"></span>
+        </h1>
+    </div>
+
+    <a href="./Union of array/index.html" class="white">Next</a>
+
+    <script>
+        function replaceWords() {
+            // Get the input string from the user
+            let inputString = document.getElementById('inputString').value;
+
+            // Split the input string into an array of words based on spaces
+            /** let text2 = "Hello World World";
+            const myArray2 = text2.split(" ");
+            console.log(myArray2); 🟢Output: ["Hello", "World", "World", "Test"] **/
+            let words = inputString.split(' ');
+
+            // Creating a Set from the words array to remove duplicates
+            /**let uniqueWordsSet = new Set(words); 
+            console.log(uniqueWordsSet); 🟢Output: { 'Hello', 'World', 'Test' } **/
+            let uniqueWordsSet = new Set(words);
+
+            //Converting the Set back into an array
+            /**let wordList = Array.from(uniqueWordsSet);
+           console.log(wordList); 🟢Output: [ 'Hello', 'World', 'Test' ] **/
+            let wordList = Array.from(uniqueWordsSet);
+
+            // Initialize an empty object to store word mappings
+            let wordMap = {}; /** Like an object to store, 
+            🔴Example: 
+            {[ key: 'Hello', 
+            key: 'World', 
+            key: 'Test' ]}**/
+
+            // Iterate through the word list to create mappings of each word to its next word
+            /** let wordLen = wordList.length;
+            console.log(wordLen); 🟢Output: 3 **/
+            for (let i = 0; i < wordList.length; i++) {
+                // The next word is the word at the next index, with modulo for wrap-around
+                wordMap[wordList[i]] = wordList[(i + 1) % wordList.length];
+                // The reaseon of using % is : 1%3=1, 2%3=2, 3%3=0. so it can go back to 0th index..
+                /**
+               1st💫{
+               wordMap[wordList[0]] which is "Hello" = wordList[(0 + 1) % 3] is wordList[1], which is "world".
+                wordMap["Hello"] = "World"
+                }
+               2nd💫{
+               wordMap[wordList[1]] which is "Hello" = wordList[(1 + 1) % 3] is wordList[2], which is "Test".
+                wordMap["world"] = "test"
+                }
+               3rd💫{
+               wordMap[wordList[2]] which is "Hello" = wordList[(2 + 1) % 3] is wordList[0], which is "Hello".
+                wordMap["test"] = "hello"
+
+                So now, the final wordMap object would look like this:
+                {
+                "hello": "world",
+                 "world": "test",
+                 "test": "hello"
+                }
+
+                **/
+
+            }
+
+            // Replacing each word in the input string with the next word in the list was our objective
+            let replacedWords = words.map( // Using map to find the replacement word
+                function (indexWord) {
+                    // If indexWord exists as a key in wordMap, wordMap[indexWord] will return its related value.
+                    /**
+                     indexWord/"hello": "world",
+                     indexWord/"world": "test",
+                     indexWord/"test": "hello"
+                     
+                     And calling the key means calling the key value..
+                     **/
+                    // If the word is not in the map, return it unchanged
+                    if (wordMap[indexWord] !== undefined) {
+                        //☝For each indexWord, it checks if wordMap[indexWord] is defined (!== undefined).
+                        //If wordMap[indexWord] is defined (meaning indexWord exists in wordMap), 
+                        return wordMap[indexWord]; // Replace with mapped value
+                        //it returns wordMap[indexWord] (its mapped value).
+                    } else {
+                        return indexWord; // Return unchanged
+                    }
+                });
+            //console.log(replacedWords); 🟢Output: [ 'world', 'test', 'hello' ]
+
+            // Join the replaced words back into a single string with spaces between them
+            let outputString = replacedWords.join(' ');
+            // console.log(outputString);  🟢Output: "world test hello"
+
+            // Display the output string in the paragraph element with id 'output'
+            document.getElementById('output').textContent = outputString;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../a.css">
+<title>Event Listeners Examples</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin: 10px;
+  }
+  .input-field {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px;
+  }
+</style>
+</head>
+<body>
+  <h2>Event Listeners Examples</h2>
+  
+  <button id="btnClick" class="button">Click me!</button>
+  <button id="btnDoubleClick" class="button">Double click me!</button>
+  <button id="btnMouseOver" class="button">Hover over me!</button>
+  <button id="btnMouseOut" class="button">Mouse out of me!</button>
+  <input type="text" id="inputField" class="input-field" placeholder="Type something...">
+  <select id="selectField" class="input-field">
+    <option value="option1">Option 1</option>
+    <option value="option2">Option 2</option>
+    <option value="option3">Option 3</option>
+  </select>
+
+  <a href="../Union of array/index.html" class="white">Previous</a>
+
+  <script>
+    function handleClick() {
+      alert('Button clicked!');
+    }
+
+    function handleDoubleClick() {
+      alert('Button double clicked!');
+    }
+
+    function handleMouseOver() {
+      document.getElementById('btnMouseOver').style.backgroundColor = '#28a745';
+    }
+
+    function handleMouseOut() {
+      document.getElementById('btnMouseOver').style.backgroundColor = '#007bff';
+    }
+
+    function handleInputChange() {
+      console.log('Input value changed:', document.getElementById('inputField').value);
+    }
+
+    function handleSelectChange() {
+      console.log('Selected option:', document.getElementById('selectField').value);
+    }
+
+    document.getElementById('btnClick').addEventListener('click', handleClick);
+    document.getElementById('btnDoubleClick').addEventListener('dblclick', handleDoubleClick);
+    document.getElementById('btnMouseOver').addEventListener('mouseover', handleMouseOver);
+    document.getElementById('btnMouseOut').addEventListener('mouseout', handleMouseOut);
+    document.getElementById('inputField').addEventListener('input', handleInputChange);
+    document.getElementById('selectField').addEventListener('change', handleSelectChange);
+  </script>
+</body>
+</html>
